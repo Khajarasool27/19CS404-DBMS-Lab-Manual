@@ -1,5 +1,4 @@
 # Experiment 2: DDL Commands
-## NAME:B.Khaja Rasool
 
 ## AIM
 To study and implement DDL commands and different types of constraints.
@@ -42,7 +41,7 @@ DROP TABLE relation_name;
 ```
 ### 4. RENAME
 Used to rename an existing database object.
-```sqla
+```sql
 RENAME TABLE old_relation_name TO new_relation_name;
 ```
 ### CONSTRAINTS
@@ -105,206 +104,171 @@ CREATE TABLE Table_Name (
 ```
 
 **Question 1**
---
-Create a table named Products with the following columns:
 
-ProductID as INTEGER
-ProductName as TEXT
-Price as REAL
-Stock as INTEGER
+![image](https://github.com/user-attachments/assets/942d6a0b-7606-402b-8f11-44f10198b37d)
 
 ```sql
-CREATE TABLE Products(
-ProductID INTEGER,
-ProductName TEXT,
-Price REAL,
-Stock INTEGER
+CREATE TABLE Bonuses(
+BonusID INT PRIMARY KEY,
+EmployeeID INT,
+BonusAmount REAL CHECK(BonusAmount>0),
+BonusDate DATE,
+Reason TEXT NOT NULL
 );
+
 ```
 **Output:**
-<img width="1187" height="299" alt="image" src="https://github.com/user-attachments/assets/9072db1c-a9fe-4b1e-a264-970a4e2fe61b" />
 
+![image](https://github.com/user-attachments/assets/ea63e41a-09d4-4288-b139-43ea519825ed)
 
 
 **Question 2**
----
-Insert all customers from Old_customers into Customers
 
-Table attributes are CustomerID, Name, Address, Email
+![image](https://github.com/user-attachments/assets/560ebfe7-6a54-41b1-a177-84d9a5353047)
 
 ```sql
-INSERT INTO Customers(CustomerID, Name, Address, Email)
-SELECT CustomerID, Name, Address, Email
-FROM Old_customers
-```
-
-**Output:**
-
-<img width="1177" height="271" alt="image" src="https://github.com/user-attachments/assets/4e06706a-bf0a-4e6a-b1cb-0bc57e282457" />
-
-
-**Question 3**
----
-Write a SQL query to Add a new ParentsNumber column  as number and Adhar_Number as Number in the Student_details table.
-
-```sql
-ALTER TABLE Student_details ADD ParentsNumber number;
-ALTER TABLE Student_details ADD Adhar_Number number;
-
-```
-
-**Output:**
-
-
-<img width="1181" height="369" alt="image" src="https://github.com/user-attachments/assets/5e51962e-22d2-4a45-8cb5-a3079d76da43" />
-
-
-**Question 4**
----
-
-Write a SQL query to Add a new column Country as text in the Student_details table.
-
-```sql
-
-ALTER TABLE Student_details ADD Country TEXT;
-```
-
-**Output:**
-
-<img width="1175" height="350" alt="image" src="https://github.com/user-attachments/assets/bd5480e9-e80d-40ef-89e0-8d4e3e9beb38" />
-
-
-
-**Question 5**
----
-Create a table named Attendance with the following constraints:
-AttendanceID as INTEGER should be the primary key.
-EmployeeID as INTEGER should be a foreign key referencing Employees(EmployeeID).
-AttendanceDate as DATE.
-Status as TEXT should be one of 'Present', 'Absent', 'Leave'.
-
-```sql
-CREATE TABLE Attendance(
-AttendanceID INTEGER PRIMARY KEY,
-EmployeeID INTEGER,
-AttendanceDate DATE,
-Status TEXT CHECK (Status IN('Present','Absent','Leave')),
-FOREIGN KEY (EmployeeID) REFERENCES Employees(EmployeeID)
-);
-```
-
-**Output:**
-
-<img width="1187" height="269" alt="image" src="https://github.com/user-attachments/assets/0840cf6a-867e-4b4a-b5c3-50fbcf336d19" />
-
-
-
-**Question 6**
----
-Insert a product with ProductID 104, Name Tablet, and Category Electronics into the Products table, where Price and Stock should use default values.
-
-```sql
-INSERT INTO Products (ProductID,Name,Category)
-VALUES(104,'Tablet','Electronics');
-```
-
-**Output:**
-
-
-<img width="1177" height="226" alt="image" src="https://github.com/user-attachments/assets/0bcbc500-3f46-41f6-b8bc-88188cb0d2a5" />
-
-
-
-
-**Question 7**
-
----
-Create a table named Tasks with the following columns:
-
-TaskID as INTEGER
-TaskName as TEXT
-DueDate as DATE
-
-```sql
-CREATE TABLE Tasks(
-TaskID INTEGER,
-TaskName TEXT,
-DueDate DATE
-);
-```
-
-**Output:**
-
-<img width="1179" height="359" alt="image" src="https://github.com/user-attachments/assets/c11afacd-90bc-4885-a15d-18dbc98337e1" />
-
-
-**Question 8**
----
-Insert a new product with ProductID 101, Name Laptop, Category Electronics, Price 1500, and Stock 50 into the Products table.
-
-```sql
-INSERT INTO Products (ProductID,Name,Category,Price,Stock)
+INSERT INTO Products(ProductID,Name,Category,Price,Stock)
 VALUES(101,'Laptop','Electronics',1500,50);
 ```
 
 **Output:**
 
+![image](https://github.com/user-attachments/assets/c341e460-a000-4de8-8a82-fdd131941394)
 
-<img width="1181" height="216" alt="image" src="https://github.com/user-attachments/assets/d6810f55-1e1b-4356-acd7-d1934d0d528b" />
 
+**Question 3**
+
+![image](https://github.com/user-attachments/assets/7078b380-4e06-425d-8f7c-1471402da45d)
+
+
+
+```sql
+CREATE TABLE item(
+item_id TEXT PRIMARY KEY,
+item_desc TEXT NOT NULL,
+rate INT NOT NULL,
+icom_id TEXT(4),
+FOREIGN KEY (icom_id) REFERENCES company(com_id)
+ON UPDATE CASCADE
+ON DELETE CASCADE
+);
+```
+
+**Output:**
+
+![image](https://github.com/user-attachments/assets/d9a11b44-58b4-4218-8148-f08af352f7c4)
+
+
+**Question 4**
+
+![image](https://github.com/user-attachments/assets/d901433e-5f0c-4ef6-ba8f-37000fd2dde5)
+
+
+```sql
+CREATE TABLE ProjectAssignments(
+AssignmentID INT PRIMARY KEY,
+EmployeeID INT,
+ProjectID INT,
+AssignmentDate DATE NOT NULL,
+FOREIGN KEY (EmployeeID) REFERENCES Employees(EmployeeID),
+FOREIGN KEY (ProjectID) REFERENCES Projects(ProjectID)
+);
+```
+
+**Output:**
+
+![image](https://github.com/user-attachments/assets/7dc2bdd2-ad69-4dbe-9114-0626ef3c0db1)
+
+**Question 5**
+
+![image](https://github.com/user-attachments/assets/52b89195-caf0-4ae9-a86f-68b5c64e1e4c)
+
+
+```sql
+INSERT INTO Books(ISBN,Title,Author,Publisher,YearPublished)
+SELECT  ISBN, Title, Author, Publisher, YearPublished
+FROM  Out_of_print_books;
+```
+
+**Output:**
+
+![image](https://github.com/user-attachments/assets/22d0beef-7ccb-4f8a-8b2c-dc4afea77986)
+
+**Question 6**
+
+![image](https://github.com/user-attachments/assets/52060e56-080f-468c-b8de-a8312006f748)
+
+```sql
+CREATE TABLE Events(
+EventID INTEGER,
+EventName TEXT,
+EventDate DATE
+);
+```
+
+**Output:**
+
+![image](https://github.com/user-attachments/assets/b22c3171-def9-4d72-97fc-140a0daa0dee)
+
+**Question 7**
+
+![image](https://github.com/user-attachments/assets/4ddf8d63-e95b-4542-bead-dee188ba99b1)
+
+```sql
+INSERT INTO Products(ProductID,Name,Category,Price,Stock)
+VALUES(106,'Fitness Tracker','Wearables',NULL,NULL);
+INSERT INTO Products(ProductID,Name,Category,Price,Stock)
+VALUES(107,'Laptop','Electronics',999.99,50);
+INSERT INTO Products(ProductID,Name,Category,Price,Stock)
+VALUES(108,'Wireless Earbuds','Accessories',NULL,100);
+```
+
+**Output:**
+
+![image](https://github.com/user-attachments/assets/591defed-3658-4976-a479-3704104d7909)
+
+**Question 8**
+
+![image](https://github.com/user-attachments/assets/db29c91b-9692-462e-ac58-ad7c8a035391)
+
+```sql
+ALTER TABLE Companies ADD COLUMN designation varchar(50);
+ALTER TABLE Companies ADD COLUMN net_salary number;
+ALTER TABLE Companies ADD COLUMN dob date;
+```
+
+**Output:**
+
+![image](https://github.com/user-attachments/assets/36f6e886-cdbc-40c1-937c-7d2559a0e7b3)
 
 **Question 9**
----
-Create a table named Shipments with the following constraints:
-ShipmentID as INTEGER should be the primary key.
-ShipmentDate as DATE.
-SupplierID as INTEGER should be a foreign key referencing Suppliers(SupplierID).
-OrderID as INTEGER should be a foreign key referencing Orders(OrderID).
+
+![image](https://github.com/user-attachments/assets/04c55e88-d808-4cce-9f43-0a4b2daa2943)
 
 ```sql
-CREATE TABLE Shipments(
-ShipmentID INTEGER PRIMARY KEY,
-ShipmentDate DATE,
-SupplierID INTEGER,
-OrderId INTEGER,
-FOREIGN KEY (SupplierID) REFERENCES Suppliers(SupplierId),
-FOREIGN KEY (OrderId)REFERENCES Orders(OrderID)
-
-);
+CREATE TABLE jobs(
+job_id INT,
+job_title TEXT DEFAULT '',
+min_salary INT DEFAULT 8000,
+max_salary INT DEFAULT NULL);
 ```
 
 **Output:**
 
-
-<img width="1186" height="215" alt="image" src="https://github.com/user-attachments/assets/c79f6409-ba3f-40fe-9baf-0caf04d92142" />
-
+![image](https://github.com/user-attachments/assets/4d67b31f-2b95-4c12-add8-b3054eb0448f)
 
 **Question 10**
----
-Create a table named Bonuses with the following constraints:
-BonusID as INTEGER should be the primary key.
-EmployeeID as INTEGER should be a foreign key referencing Employees(EmployeeID).
-BonusAmount as REAL should be greater than 0.
-BonusDate as DATE.
-Reason as TEXT should not be NULL.
+
+![image](https://github.com/user-attachments/assets/baedcb9b-7706-43c1-afd3-a0ca26f7c903)
 
 ```sql
-CREATE TABLE Bonuses(
-BonusID INTEGER PRIMARY KEY,
-EmployeeID INTEGER,
-BonusAmount REAL CHECK (BonusAmount>0),
-BonusDate DATE,
-Reason TEXT NOT NULL,
-FOREIGN KEY (EmployeeID)REFERENCES
-Employees(EmployeeID)
-);
+ALTER TABLE Student_details ADD COLUMN Email VARCHAR(50);
+ALTER TABLE Student_details ADD COLUMN MARKS INT DEFAULT 0;
 ```
 
 **Output:**
 
-
-
-<img width="1186" height="259" alt="image" src="https://github.com/user-attachments/assets/0c702860-ea95-4cf3-b8ef-d5cebd486fe8" />
+![image](https://github.com/user-attachments/assets/e2dcd365-c733-4639-9d0d-e9db05b3eda1)
 
 
 ## RESULT
